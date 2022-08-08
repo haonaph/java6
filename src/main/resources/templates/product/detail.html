@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+    <main th:object="${items}">
+        CHI TIET
+				<img th:src="*{image}" width="179" height="179">
+        <ul>
+            <li>[[*{name}]]</li>
+            <li>Gia: $[[*{price}]]</li>
+            <li>Ngay nhap: [[*{createdate}]]</li>
+            <li>Hang: [[*{category_id.name}]]</li>
+        </ul>
+        SP CUNG LOAI
+        <ul>
+            <li th:each="p:*{category_id.products}"><a th:href="@{|/product/detail/${p.id}}"> [[${p.name}]]</a></li>
+        </ul>
+    </main>
+</body>
+
+</html>

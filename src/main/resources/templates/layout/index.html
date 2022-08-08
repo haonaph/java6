@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java 6</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/slideshow.css">
+
+</head>
+
+<body class="container" ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+    <header class="row">
+        <div class="head">
+            <img id="anh" th:src="@{|https://firebasestorage.googleapis.com/v0/b/handlerimage.appspot.com/o/iPhone_11.jpg?alt=media&token=e91abc44-d296-419f-855a-312bef05393d|}" width="100%">
+            <hr>
+            <button class="next">></button>
+            <button class="prev"><</button>
+
+
+        </div>
+    </header>
+    <nav class="row">
+        <div th:replace="/layout/_menu.html"></div>
+    </nav>
+    <div class="row">
+        <article class="col-sm-9">
+            <div th:replace="${main}"></div>
+        </article>
+        <aside class="col-sm-3">
+            <div th:replace="/layout/_cart_info.html"></div>
+            <div th:replace="/layout/_category.html"></div>
+        </aside>
+    </div>
+    		<div class="footer">
+			<hr>
+			<center>
+				<h4>Hệ Thống Điện Thoại ISHOPmobile.vn</h4>
+				Địa chỉ: Nam Từ Liêm, Hà Nội / Điện thoại: 01682223456 /
+				Fshop.com.vn /<br> Email: nguyenhao260901@gmail.com
+
+			</center>
+		</div>
+
+    <script src="/assets/js/shopping-cart-app.js"></script>
+    <script type="text/javascript">
+        localStorage.setItem('load', taodtsp);
+        var images = [
+            "https://firebasestorage.googleapis.com/v0/b/handlerimage.appspot.com/o/iPhone_11.jpg?alt=media&token=e91abc44-d296-419f-855a-312bef05393d",
+            "https://firebasestorage.googleapis.com/v0/b/handlerimage.appspot.com/o/realme.jpg?alt=media&token=68b9df1e-6442-42e7-a649-137be9d646bf",
+            "https://firebasestorage.googleapis.com/v0/b/handlerimage.appspot.com/o/iPhone7_Plus.jpg?alt=media&token=14cd2a48-8230-44ac-a624-3e660abe7616",
+            "https://firebasestorage.googleapis.com/v0/b/handlerimage.appspot.com/o/huawei.png?alt=media&token=3841a2ce-d6fe-48d6-872f-6ab8e602c58d"
+        ];
+        num = 0;
+
+        function taodtsp(hinhAnh, tenSP, donGia) {
+            var sanPham = new Object();
+            sanPham.hinhAnh = hinhAnh;
+            sanPham.tenSP = tenSP;
+            sanPham.donGia = donGia;
+
+            return sanPham;
+
+        }
+
+        function next() {
+            var x = document.getElementById("anh");
+            num++;
+            if (num >= images.length) {
+                num = 0;
+            }
+            x.src = images[num];
+        }
+
+        function prev() {
+            var x = document.getElementById("anh");
+            num--;
+            if (num < 0) {
+                num = images.length - 1;
+            }
+            x.src = images[num];
+        }
+        setInterval(next, 3500);
+    </script>
+</body>
+
+</html>
